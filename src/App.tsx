@@ -3,10 +3,11 @@ import { io, Socket } from "socket.io-client";
 
 function App() {
   const [socket, setSocket] = useState<Socket | null>(null);
+
+  const [sala, setSala] = useState(1);
   useEffect(() => {
     const socket = io("http://localhost:3001");
     socket.emit("citas");
-
     setSocket(socket);
   }, []);
 
@@ -23,17 +24,12 @@ function App() {
       console.log("Cita Obtenida", data);
     });
 
-    socket?.on("mensaje", (data) => {
-      console.log(data);
-    });
-
     socket?.on("citas", (data) => {
       console.log(data);
     });
   }, [socket]);
 
   const [cita, setCita] = useState("");
-  const [sala, setSala] = useState(1);
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
