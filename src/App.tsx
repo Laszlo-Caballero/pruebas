@@ -12,6 +12,10 @@ function App() {
   }, []);
 
   useEffect(() => {
+    socket?.on("unido", (data) => {
+      console.log(data);
+    });
+
     socket?.on("citas", (data) => {
       console.log(data);
     });
